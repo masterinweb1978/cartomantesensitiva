@@ -1,1 +1,1314 @@
 <!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna Stella Veritas - Presentazione Esoterica</title>
+    <!-- Font e Icone adatti al tema mistico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #07010f;
+            --bg-card: #0e031c;
+            --gold: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --neon-pink: #f72585;
+            --neon-glow: rgba(247, 37, 133, 0.4);
+            --text-light: #e2d9f3;
+            --text-muted: #bfaed8;
+            --border-purple: #5a189a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Contenitore principale della presentazione */
+        .presentation-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            background-color: var(--bg-card);
+            background-image: radial-gradient(circle at center, #1b0731 0%, #080112 100%);
+            border: 2px solid var(--border-purple);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 40px rgba(90, 24, 154, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh;
+        }
+
+        /* Sfondo stellato decorativo */
+        .presentation-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(rgba(124, 34, 228, 0.15) 1.5px, transparent 0);
+            background-size: 24px 24px;
+            opacity: 0.5;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        h1, h2, h3 {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 15px var(--gold-glow);
+            letter-spacing: 2px;
+        }
+
+        p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Gestione degli slide attivi */
+        .slides-container {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            padding: 40px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.active {
+            display: flex;
+            animation: slideInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .slide-header {
+            width: 100%;
+            max-width: 950px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide-header i {
+            color: var(--neon-pink);
+            font-size: 24px;
+            text-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        .slide-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .slide-content {
+            width: 100%;
+            max-width: 950px;
+        }
+
+        /* */
+        /* Layout Copertina con foto intera valorizzata */
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            width: 100%;
+            align-items: center;
+        }
+
+        @media (max-width: 868px) {
+            .cover-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+
+        /* Contenitore spazioso per evitare qualsiasi taglio alla tua foto reale */
+        .portrait-wrapper-clean {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Sfondo mistico ad aura che sta DIETRO la tua figura */
+        .portal-background-glow {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(90, 24, 154, 0.6) 0%, rgba(247, 37, 133, 0.15) 50%, transparent 70%);
+            filter: blur(15px);
+            z-index: 1;
+            animation: slow-pulse 4s ease-in-out infinite alternate;
+        }
+
+        .portal-rotating-rings-clean {
+            position: absolute;
+            width: 95%;
+            height: 95%;
+            border: 2px dashed rgba(255, 215, 0, 0.25);
+            border-radius: 50%;
+            animation: rotate-clockwise 30s linear infinite;
+            z-index: 1;
+        }
+
+        /* La tua foto originale senza ritagli o maschere circolari */
+        .cover-portrait-clean {
+            position: relative;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            z-index: 2;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
+            animation: floating-magic 6s ease-in-out infinite;
+        }
+
+        .cover-text-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (max-width: 868px) {
+            .cover-text-block {
+                align-items: center;
+            }
+        }
+
+        .cover-text-block h1 {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff9e00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.2));
+        }
+
+        .cover-text-block .subtitle {
+            font-size: 17px;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .divider-gold {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 868px) {
+            .divider-gold {
+                background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            }
+        }
+
+        .cover-text-block .tagline {
+            font-size: 11px;
+            color: var(--neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Griglia generica a due colonne */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 40px;
+            width: 100%;
+            align-items: center;
+        }
+
+        @media (max-width: 868px) {
+            .two-column-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 320px;
+            height: 500px;
+            background: #18191a;
+            border: 12px solid #2d124d;
+            border-radius: 40px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 35px rgba(247, 37, 133, 0.3), 0 15px 35px rgba(0,0,0,0.9);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-mockup::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 5px;
+            background: #2d124d;
+            border-radius: 3px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-color: #18191a;
+            padding-top: 10px;
+        }
+
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+        .phone-screen::-webkit-scrollbar-thumb {
+            background-color: var(--border-purple);
+            border-radius: 2px;
+        }
+
+        /* */
+        /* Elementi grafici Facebook replicati in puro CSS */
+        .fb-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid #2f3031;
+            background: #242526;
+            color: #e4e6eb;
+            font-size: 12px;
+        }
+
+        .fb-profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+        }
+
+        .fb-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-pink);
+            background-image: url('anna-cartomante-milano-1024x904.webp');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .fb-user-details {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .fb-user-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .fb-post-time {
+            font-size: 11px;
+            color: #b0b3b8;
+        }
+
+        .fb-post-text {
+            padding: 0 12px 12px 12px;
+            font-size: 12px;
+            color: #e4e6eb;
+            line-height: 1.5;
+        }
+
+        .fb-post-text p {
+            margin-bottom: 6px;
+            color: #e4e6eb;
+            font-size: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .fb-image-container {
+            width: 100%;
+            position: relative;
+            background-color: #242526;
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .fb-post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Sigillo artistico sovrapposto con il numero di cellulare */
+        .fb-artistic-seal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 90px;
+            height: 90px;
+            border: 2px dashed var(--neon-pink);
+            border-radius: 50%;
+            background: rgba(14, 3, 28, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--neon-glow), inset 0 0 8px rgba(247, 37, 133, 0.4);
+            animation: slow-rotate 15s linear infinite;
+            pointer-events: none;
+        }
+
+        .fb-artistic-seal-text {
+            color: var(--gold);
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 4px var(--gold);
+        }
+
+        .fb-artistic-seal-number {
+            color: #00f0ff;
+            font-size: 10px;
+            font-weight: 900;
+            margin-top: 3px;
+            text-shadow: 0 0 6px rgba(0, 240, 255, 0.8);
+        }
+
+        .fb-action-summary {
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #b0b3b8;
+            border-bottom: 1px solid #2f3031;
+        }
+
+        .fb-actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 4px 0;
+            border-bottom: 1px solid #2f3031;
+            background: #242526;
+        }
+
+        .fb-action-btn {
+            background: transparent;
+            border: none;
+            color: #b0b3b8;
+            font-size: 11px;
+            padding: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .fb-action-btn.liked {
+            color: #2d88ff;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(14, 3, 28, 0.95);
+            border: 1px solid var(--neon-pink);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px var(--neon-glow);
+            animation: pulse-scroll 2.5s infinite;
+            z-index: 5;
+        }
+
+        .three-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        @media (max-width: 868px) {
+            .three-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        .card-node {
+            background: rgba(18, 5, 36, 0.8);
+            border: 1px solid rgba(124, 34, 228, 0.3);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #7209b7, var(--neon-pink));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-node:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.15);
+        }
+
+        .card-node:hover::before {
+            opacity: 1;
+        }
+
+        .card-node .card-icon {
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px var(--gold-glow));
+        }
+
+        .card-node h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--neon-pink);
+        }
+
+        /* */
+        .ritual-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            width: 100%;
+            align-items: center;
+        }
+
+        @media (max-width: 868px) {
+            .ritual-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        .gothic-arch-frame {
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 1 / 1.4;
+            border-top-left-radius: 140px;
+            border-top-right-radius: 140px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 25px var(--gold-glow), inset 0 0 15px rgba(0,0,0,0.8);
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .gothic-arch-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gothic-arch-frame:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Slide 5: La Porta della Percezione con Sfondo di Abbondanza/Pagamenti */
+        .perception-gate-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            width: 100%;
+            align-items: center;
+        }
+
+        @media (max-width: 868px) {
+            .perception-gate-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Struttura della vera Porta della Percezione */
+        .gate-door-container {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1 / 1.5;
+            margin: 0 auto;
+            position: relative;
+            border-top-left-radius: 160px;
+            border-top-right-radius: 160px;
+            border: 4px solid var(--gold);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4), inset 0 0 30px rgba(247, 37, 133, 0.3);
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Immagine di sfondo che ricorda l'abbondanza, l'oro e i pagamenti */
+        .gate-door-bg {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(14, 3, 28, 0.4), rgba(14, 3, 28, 0.8)), 
+                              url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            animation: slow-scale 12s ease-in-out infinite alternate;
+        }
+
+        /* Sovrapposizione simbolica ed esoterica sull'oro/pagamenti */
+        .gate-door-symbol {
+            font-size: 60px;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold-glow);
+            margin-bottom: 15px;
+            animation: float-glowing 3s ease-in-out infinite;
+        }
+
+        .gate-door-text {
+            font-family: 'Cinzel', serif;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+            text-transform: uppercase;
+        }
+
+        .gate-door-subtext {
+            font-size: 11px;
+            color: #00f0ff;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+        }
+
+        .perception-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .perception-content h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .perception-benefit-list {
+            list-style: none;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .perception-benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .perception-benefit-item i {
+            color: var(--gold);
+            margin-top: 3px;
+            text-shadow: 0 0 5px var(--gold-glow);
+        }
+
+        /* Slide 6: Pagina Contatti con pulsante di chiamata */
+        .contact-panel {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-panel .cta-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .glowing-phone-box {
+            background: linear-gradient(135deg, var(--neon-pink) 0%, #7209b7 100%);
+            border: 3px solid var(--gold);
+            border-radius: 50px;
+            padding: 16px 45px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px var(--neon-glow), 0 0 15px var(--gold-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glowing-phone-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--neon-glow), 0 0 20px var(--gold-glow);
+        }
+
+        .glowing-phone-box i {
+            font-size: 28px;
+            color: var(--gold);
+            animation: phone-shake-anim 2s infinite;
+        }
+
+        .glowing-phone-box .num {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 600px) {
+            .glowing-phone-box {
+                padding: 12px 25px;
+            }
+            .glowing-phone-box .num {
+                font-size: 22px;
+            }
+            .glowing-phone-box i {
+                font-size: 22px;
+            }
+        }
+
+        .web-link-glowing {
+            font-size: 22px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .web-link-glowing:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 12px var(--neon-glow);
+            border-color: var(--neon-pink);
+        }
+
+        /* */
+        .navigation-bar {
+            height: auto;
+            min-height: 80px;
+            width: 100%;
+            background-color: #0b0217;
+            border-top: 1px solid rgba(124, 34, 228, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+            z-index: 10;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            .navigation-bar {
+                flex-direction: column;
+                justify-content: center;
+                padding: 15px;
+            }
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            color: var(--gold);
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(255, 215, 0, 0.08);
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-btn:disabled {
+            color: #444;
+            border-color: #222;
+            cursor: not-allowed;
+        }
+
+        .dots-navigation {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(18, 5, 36, 0.8);
+            border: 1px solid rgba(124, 34, 228, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #9d4edd;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            transform: scale(1.08);
+        }
+
+        .dot.active {
+            background: linear-gradient(135deg, #7209b7, var(--neon-pink));
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px var(--neon-glow);
+        }
+
+        /* */
+        @keyframes floating-magic {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes float-glowing {
+            0% { transform: translateY(0px); filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); }
+            50% { transform: translateY(-8px); filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)); }
+            100% { transform: translateY(0px); filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); }
+        }
+
+        @keyframes rotate-clockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slow-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slow-scale {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        @keyframes slow-pulse {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes phone-shake-anim {
+            0%, 80%, 100% { transform: rotate(0deg); }
+            85% { transform: rotate(5deg); }
+            90% { transform: rotate(-5deg); }
+            95% { transform: rotate(5deg); }
+        }
+
+        @keyframes pulse-scroll {
+            0% { opacity: 0.7; transform: translate(-50%, 0); }
+            50% { opacity: 1; transform: translate(-50%, -5px); }
+            100% { opacity: 0.7; transform: translate(-50%, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-wrapper">
+        
+        <div class="slides-container">
+            
+            <!-- SLIDE 1: COPERTINA CON IMMAGINE INTERA SENZA TAGLI -->
+            <div class="slide active" id="slide-1">
+                <div class="slide-content">
+                    <div class="cover-grid">
+                        
+                        <!-- Colonna Sinistra: La tua foto originale valorizzata senza maschere circolari o tagli -->
+                        <div class="portrait-wrapper-clean">
+                            <div class="portal-background-glow"></div>
+                            <div class="portal-rotating-rings-clean"></div>
+                            <!-- Immagine originale senza ritagli -->
+                            <img src="anna-cartomante-milano-1024x904.webp" alt="Anna Stella Veritas" class="cover-portrait-clean" onerror="this.onerror=null; this.src='https://placehold.co/500x500/1b0731/ffd700?text=Anna+Stella+Veritas';">
+                        </div>
+
+                        <!-- Colonna Destra: Testo di presentazione ufficiale in italiano elegante -->
+                        <div class="cover-text-block">
+                            <h1 style="font-family: 'Cinzel', serif;">ANNA STELLA VERITAS</h1>
+                            <p class="subtitle">Guida Iniziatica di Alta Sensibilità & Risoluzioni Energetiche</p>
+                            <div class="divider-gold"></div>
+                            <p class="tagline">Tradizione • Sapienza • Sblocchi Concreti</p>
+                            <p class="cover-intro">
+                                Attraverso lo studio dei flussi cosmici e la profonda sapienza antica, accompagno le persone a ritrovare la luce, superare gli ostacoli del destino sentimentale, ricucire legami in frantumi e sbloccare situazioni professionali stagnanti.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: SMARTPHONE E POST FACEBOOK INTERATTIVO -->
+            <div class="slide" id="slide-2">
+                <div class="slide-header">
+                    <i class="fa-solid fa-square-rss"></i>
+                    <h2 class="slide-title">La Voce dell'Insegnamento</h2>
+                </div>
+                <div class="slide-content">
+                    <div class="two-column-grid">
+                        <div>
+                            <!-- Mockup Smartphone Interattivo con Post Facebook scorrevole -->
+                            <div class="phone-mockup">
+                                <div class="phone-screen" id="phoneScreen">
+                                    
+                                    <!-- Intestazione Facebook replicata -->
+                                    <div class="fb-header">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                            <span style="font-weight: 600; font-size: 11px;">Anna Stella Veritas</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; font-size: 11px;">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dettagli Profilo -->
+                                    <div class="fb-profile-section">
+                                        <div style="display: flex; align-items: center;">
+                                            <div class="fb-avatar"></div>
+                                            <div class="fb-user-details">
+                                                <div class="fb-user-name">
+                                                    Anna Stella Veritas
+                                                    <i class="fa-solid fa-circle-check" style="color: #1877f2; font-size: 10px;"></i>
+                                                </div>
+                                                <div class="fb-post-time">1 g · <i class="fa-solid fa-earth-americas"></i></div>
+                                            </div>
+                                        </div>
+                                        <i class="fa-solid fa-ellipsis" style="color: #b0b3b8; font-size: 11px;"></i>
+                                    </div>
+
+                                    <!-- Testo originale del Post di Facebook -->
+                                    <div class="fb-post-text">
+                                        <p>Operatrice esoterica qualificata. Risolvo situazioni complesse.</p>
+                                        <p>🔮 <strong>POTENTI RITUALI PER:</strong></p>
+                                        <p>❤️ AMORE e legami (Ritorni d'amore, passioni...)</p>
+                                        <p>💼 LAVORO e affari (Carriera, fortuna negli affari...)</p>
+                                        <p>🕊️ PACE IN FAMIGLIA (Armonia, risoluzione conflitti...)</p>
+                                        <p><strong>CONTATTAMI SUBITO:</strong></p>
+                                        <p>📞 Appuntamenti Virtuali (Videoregistrati)</p>
+                                        <p>📍 Nel mio Studio: Milano, Bergamo, Brescia, Gallarate</p>
+                                        <p style="color: #2d88ff; font-weight: 500; text-decoration: underline;">www.annastellaveritas.com</p>
+                                    </div>
+
+                                    <!-- Immagine con Sigillo e Telefono integrato in modo artistico -->
+                                    <div class="fb-image-container">
+                                        <img src="watermarked_img_10455596739565272480.png" alt="Anna Stella Veritas Facebook" class="fb-post-image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&q=80&w=600';">
+                                        
+                                        <!-- Sigillo con il numero di cellulare in evidenza -->
+                                        <div class="fb-artistic-seal">
+                                            <span class="fb-artistic-seal-text">VERITAS</span>
+                                            <span class="fb-artistic-seal-number">3479166343</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sommario interazioni -->
+                                    <div class="fb-action-summary">
+                                        <div style="display: flex; align-items: center; gap: 4px;">
+                                            <span style="background: #1877f2; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 7px; color: white;">
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                            </span>
+                                            <span id="likesCount">Piace a 4 persone</span>
+                                        </div>
+                                        <div>
+                                            <span>1 Condivisione</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pulsanti di Azione Reattivi -->
+                                    <div class="fb-actions">
+                                        <button class="fb-action-btn" id="likeButton" onclick="toggleFbLike()">
+                                            <i class="fa-regular fa-thumbs-up" id="likeIcon"></i> Mi piace
+                                        </button>
+                                        <button class="fb-action-btn" onclick="simulateComment()">
+                                            <i class="fa-regular fa-comment"></i> Commenta
+                                        </button>
+                                        <button class="fb-action-btn">
+                                            <i class="fa-regular fa-share-from-square"></i> Condividi
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-indicator" id="scrollIndicator">
+                                    <i class="fa-solid fa-chevron-down"></i> Scorri il Post
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-block">
+                            <h3>Un Faro di Saggezza al tuo Fianco</h3>
+                            <p>Nel cammino della vita, le ombre del dubbio possono confondere la direzione. L'intervento esoterico guidato con onestà intellettuale permette di individuare i blocchi che impediscono la felicità.</p>
+                            <p>Opero con assoluta discrezione professionale, analizzando accuratamente ogni dinamica affettiva o materiale per ristabilire l'equilibrio cosmico originale della tua esistenza.</p>
+                            <p>Prendi in mano il timone della tua vita e dirigi il tuo destino verso la felicità.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: PERCORSI ESOTERICI -->
+            <div class="slide" id="slide-3">
+                <div class="slide-header">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h2 class="slide-title">Percorsi e Sblocchi Esoterici</h2>
+                </div>
+                <div class="slide-content">
+                    <div class="three-cards-grid">
+                        <div class="card-node">
+                            <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
+                            <h3>Amore e Legami</h3>
+                            <p>Armonizzazioni energetiche, riavvicinamenti sinceri e rinsaldamento delle unioni sentimentali per ritrovare la perduta armonia di coppia.</p>
+                        </div>
+                        <div class="card-node">
+                            <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <h3>Lavoro e Fortuna</h3>
+                            <p>Canalizzazioni per il successo professionale, purificazione energetica delle attività e sblocco di percorsi lavorativi interrotti.</p>
+                        </div>
+                        <div class="card-node">
+                            <div class="card-icon"><i class="fa-solid fa-house-chimney-crack"></i></div>
+                            <h3>Pace Familiare</h3>
+                            <p>Rimozione di ostacoli e influenze negative domestiche, favorendo il ritorno del dialogo e della pace tra le mura familiari.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: L'ARTE DELLA RITUALISTICA -->
+            <div class="slide" id="slide-4">
+                <div class="slide-header">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <h2 class="slide-title">L'Arte della Ritualistica</h2>
+                </div>
+                <div class="slide-content">
+                    <div class="ritual-grid">
+                        <div class="text-block">
+                            <h3>Unione di Intenzioni e Simboli Sacri</h3>
+                            <p>I rituali eseguiti da Anna Stella Veritas sono cerimonie strutturate con profonda precisione astronomica e planetaria, utilizzando elementi tradizionali naturali.</p>
+                            <p>Ogni operazione viene pianificata minuziosamente sulla base delle necessità individuali della persona, senza improvvisazioni, per sintonizzare il tuo cammino con le vibrazioni del successo e dell'equilibrio cosmico.</p>
+                            <p>Un supporto d'eccellenza per scacciare l'oscurità e fare spazio alla prosperità.</p>
+                        </div>
+                        <div>
+                            <div class="gothic-arch-frame">
+                                <img src="https://www.jsouthernstudio.com/cdn/shop/articles/Color_Symbolism__6x4_e1ddfc30-c75e-43f8-88e5-fea3fe87cd60_2048x.jpg?v=1694200870" alt="Rituale Sacro">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: LA PORTA DELLA PERCEZIONE (ABBONDANZA, RISOLUZIONI E PAGAMENTI) -->
+            <div class="slide" id="slide-5">
+                <div class="slide-header">
+                    <i class="fa-solid fa-door-open"></i>
+                    <h2 class="slide-title">La Porta della Percezione</h2>
+                </div>
+                <div class="slide-content">
+                    <div class="perception-gate-grid">
+                        
+                        <!-- Visual della Porta della Percezione con sfondo di monete/abbondanza -->
+                        <div class="gate-door-container">
+                            <div class="gate-door-bg">
+                                <div class="gate-door-symbol">
+                                    <i class="fa-solid fa-coins"></i>
+                                </div>
+                                <div class="gate-door-text">Sblocco</div>
+                                <div class="gate-door-text" style="color: var(--gold);">Abbondanza</div>
+                                <div class="gate-door-subtext">Varcare le Soglie del Destino</div>
+                            </div>
+                        </div>
+
+                        <!-- Testo descrittivo ad alta leggibilità -->
+                        <div class="perception-content">
+                            <h3>Aprire le Vie del Flusso Economico</h3>
+                            <p>La Porta della Percezione rappresenta lo sblocco supremo di tutte le energie materiali congestionate. Quando il flusso del denaro o del lavoro si arresta, la causa è spesso un blocco energetico sottile.</p>
+                            <p>Attraverso un'analisi mirata e interventi esoterici precisi, ricollego i tuoi canali personali alle correnti cosmiche della prosperità e del benessere materiale.</p>
+                            
+                            <ul class="perception-benefit-list">
+                                <li class="perception-benefit-item">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span><strong>Sblocco Economico:</strong> Allontanamento delle interferenze che ostacolano transazioni, vendite e pagamenti attesi.</span>
+                                </li>
+                                <li class="perception-benefit-item">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span><strong>Fortuna negli Affari:</strong> Attrazione di nuove opportunità di guadagno, crescita professionale e stabilità materiale.</span>
+                                </li>
+                                <li class="perception-benefit-item">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span><strong>Risoluzione dei Debiti:</strong> Armonizzazione energetica per riequilibrare i flussi finanziari in uscita e in entrata.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: CONTATTI -->
+            <div class="slide" id="slide-6">
+                <div class="slide-header">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <h2 class="slide-title">Inizia la Tua Rinascita</h2>
+                </div>
+                <div class="slide-content">
+                    <div class="contact-panel">
+                        <p class="cta-text">Il destino non si subisce, si costruisce. Prendi ora la decisione di cambiare la tua situazione.</p>
+                        
+                        <!-- Pulsante di chiamata ad alto impatto grafico -->
+                        <a href="tel:3479166343" class="glowing-phone-box">
+                            <i class="fa-solid fa-phone"></i>
+                            <span class="num">347 916 6343</span>
+                        </a>
+                        
+                        <p style="margin-bottom: 12px; font-size: 14px;">Oppure visita e approfondisci sul sito web ufficiale:</p>
+                        <a href="https://www.annastellaveritas.com" target="_blank" class="web-link-glowing">www.annastellaveritas.com</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BARRA DI NAVIGAZIONE INFERIORE -->
+        <div class="navigation-bar">
+            <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)" disabled>
+                <i class="fa-solid fa-arrow-left"></i> Precedente
+            </button>
+            
+            <div class="dots-navigation">
+                <div class="dot active" onclick="goToSlide(1)"><i class="fa-solid fa-star"></i></div>
+                <div class="dot" onclick="goToSlide(2)"><i class="fa-solid fa-user"></i></div>
+                <div class="dot" onclick="goToSlide(3)"><i class="fa-solid fa-gem"></i></div>
+                <div class="dot" onclick="goToSlide(4)"><i class="fa-solid fa-fire"></i></div>
+                <div class="dot" onclick="goToSlide(5)"><i class="fa-solid fa-door-open"></i></div>
+                <div class="dot" onclick="goToSlide(6)"><i class="fa-solid fa-phone"></i></div>
+            </div>
+            
+            <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">
+                Successivo <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+        let hasLiked = false;
+
+        function updateNavigation() {
+            // Aggiorna lo stato dei bottoni
+            document.getElementById('prev-btn').disabled = (currentSlide === 1);
+            document.getElementById('next-btn').disabled = (currentSlide === totalSlides);
+
+            // Gestisce la visibilità degli slide attivi
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            }
+
+            // Aggiorna lo stato delle icone di navigazione inferiori
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index + 1 === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            updateNavigation();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateNavigation();
+        }
+
+        // Supporto per la navigazione da tastiera (Frecce direzionali)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft' && currentSlide > 1) {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight' && currentSlide < totalSlides) {
+                changeSlide(1);
+            }
+        });
+
+        // Nasconde l'indicatore di scorrimento dello smartphone una volta scrollato il post
+        const phoneScreen = document.getElementById('phoneScreen');
+        if (phoneScreen) {
+            phoneScreen.addEventListener('scroll', function() {
+                const indicator = document.getElementById('scrollIndicator');
+                if (indicator && phoneScreen.scrollTop > 20) {
+                    indicator.style.opacity = '0';
+                    indicator.style.transition = 'opacity 0.4s ease';
+                }
+            });
+        }
+
+        // Simulazione del "Mi Piace" interattivo all'interno del post Facebook finto
+        function toggleFbLike() {
+            hasLiked = !hasLiked;
+            const likeButton = document.getElementById('likeButton');
+            const likeIcon = document.getElementById('likeIcon');
+            const likesCountText = document.getElementById('likesCount');
+
+            if (hasLiked) {
+                likeButton.classList.add('liked');
+                likeIcon.className = 'fa-solid fa-thumbs-up';
+                likesCountText.innerText = 'Piace a te e altre 4 persone';
+            } else {
+                likeButton.classList.remove('liked');
+                likeIcon.className = 'fa-regular fa-thumbs-up';
+                likesCountText.innerText = 'Piace a 4 persone';
+            }
+        }
+
+        // Simulatore del pulsante di commento con pop-up interattivo all'interno dello schermo
+        function simulateComment() {
+            const screen = document.getElementById('phoneScreen');
+            const bubble = document.createElement('div');
+            bubble.style.position = 'absolute';
+            bubble.style.bottom = '50px';
+            bubble.style.left = '50%';
+            bubble.style.transform = 'translateX(-50%)';
+            bubble.style.background = 'rgba(90, 24, 154, 0.95)';
+            bubble.style.color = '#fff';
+            bubble.style.padding = '8px 15px';
+            bubble.style.borderRadius = '20px';
+            bubble.style.fontSize = '11px';
+            bubble.style.fontWeight = '500';
+            bubble.style.zIndex = '100';
+            bubble.style.textAlign = 'center';
+            bubble.style.boxShadow = '0 5px 15px rgba(0,0,0,0.5)';
+            bubble.style.border = '1px solid var(--gold)';
+            bubble.innerText = '💬 Apertura consulto rapido...';
+            
+            screen.appendChild(bubble);
+            setTimeout(() => {
+                bubble.style.opacity = '0';
+                bubble.style.transition = 'opacity 0.4s ease';
+                setTimeout(() => bubble.remove(), 400);
+            }, 1800);
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
